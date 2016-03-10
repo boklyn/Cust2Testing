@@ -1,0 +1,378 @@
+﻿{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminPassword": {
+            "type": "securestring",
+            "defaultValue": "nopass",
+            "metadata": {
+                "description": "NG Firewall Root User password"
+            }
+        },
+        "backEndNICBarracuda1IP": {
+            "type": "string",
+            "metadata": {
+                "description": "NG Firewall A Private IP BackEnd NIC"
+            }
+        },
+        "backEndNICBarracuda1Name": {
+            "type": "string",
+            "metadata": {
+                "description": "NG Firewall A Private IP BackEnd NIC"
+            }
+        },
+        "backEndNICBarracuda2IP": {
+            "type": "string",
+            "metadata": {
+                "description": "NG Firewall B Private IP BackEnd NIC"
+            }
+        },
+        "backEndNICBarracuda2Name": {
+            "type": "string",
+            "metadata": {
+                "description": "NG Firewall B Private IP BackEnd NIC"
+            }
+        },
+        "backEndSubnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "Backend Subnet Name"
+            }
+        },
+        "frontEndNICBarracuda1IP": {
+            "type": "string",
+            "metadata": {
+                "description": "NG Firewall A Private IP FrontEnd NIC"
+            }
+        },
+        "frontEndNICBarracuda1Name": {
+            "type": "string",
+            "metadata": {
+                "description": "NG Firewall A Private IP FrontEnd NIC"
+            }
+        },
+        "frontEndNICBarracuda2IP": {
+            "type": "string",
+            "metadata": {
+                "description": "NG Firewall B Private IP FrontEnd NIC"
+            }
+        },
+        "frontEndNICBarracuda2Name": {
+            "type": "string",
+            "metadata": {
+                "description": "NG Firewall B Private IP FrontEnd NIC"
+            }
+        },
+        "frontEndSubnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "Frontend Subnet Name"
+            }
+        },
+        "loadBalancerName": {
+            "type": "string",
+            "metadata": {
+                "description": "Azure LoadBalancer Name"
+            }
+        },
+        "location": {
+            "type": "String",
+            "allowedValues": [
+                "East US",
+                "West US",
+                "West Europe",
+                "North Europe"
+            ],
+            "metadata": {
+                "description": "Deployment location"
+            }
+        },
+        "storageAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "Storage Account Name"
+            }
+        },
+        "vNETName": {
+            "type": "string",
+            "metadata": {
+                "description": "VNET IP range"
+            }
+        },
+        "loadBalancerPublicIPName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name for the Public IP object used to access the NG"
+            }
+        },
+        "loadBalancerPublicDNSName": {
+            "type": "string",
+            "metadata": {
+                "description": "Unique DNS Name for the Public IP used to access the NG"
+            }
+        },
+        "ngAvailabilitySetName": {
+            "type": "string",
+            "metadata": {
+                "description": "NG Firewall High Availability Set Name"
+            }
+        },
+        "ng1Name": {
+            "type": "string",
+            "metadata": {
+                "description": "First NG Firewall Name"
+            }
+        },
+        "ng2Name": {
+            "type": "string",
+            "metadata": {
+                "description": "Second NG Firewall Name"
+            }
+        },
+        "vnetResourceGroup": {
+            "type": "string",
+            "metadata": {
+                "description": "The resource group that holds the Vnet ojbect. "
+            }
+        }
+    },
+  "variables": {
+    "adminUsername": "azureadmin",
+    "backEndRef": "[concat(variables('vnetID'),'/subnets/',parameters('backEndSubnetName'))]",
+    "frontEndIPConfigID": "[concat(variables('loadBalancerID'),'/frontendIPConfigurations/loadBalancerFrontend')]",
+    "frontEndRef": "[concat(variables('vnetID'),'/subnets/',parameters('frontEndSubnetName'))]",
+    "loadBalancerID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]",
+    "loadBalancerPoolID": "[concat(variables('loadBalancerID'),'/backendAddressPools/loadBalancerBackend')]",
+    "loadBalancerProbeID": "[concat(variables('loadBalancerID'),'/probes/tcpProbe')]",
+    "loadBalancerPublicIPID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('loadBalancerPublicIPName'))]",
+    "publicIPAddressType": "Static",
+    "storageAccountType": "Standard_LRS",
+    "vmSize": "Standard_D4",
+    "vmStorageAccountContainerName": "vhds",
+    "vnetID": "[resourceId(parameters('vnetResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('vNETName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[parameters('storageAccountName')]",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[parameters('location')]",
+      "tags": {
+        "displayName": "StorageAccount"
+      },
+      "properties": {
+        "accountType": "[variables('storageAccountType')]"
+      }
+    },
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('loadBalancerPublicIPName')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "displayName": "LoadBalancerNGIP"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('loadBalancerPublicDNSName')]"
+        }
+      }
+    },
+    {
+      "name": "[parameters('ngAvailabilitySetName')]",
+      "type": "Microsoft.Compute/availabilitySets",
+      "location": "[parameters('location')]",
+      "apiVersion": "2015-06-15",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "NGAvailabilitySet"
+      }
+    },
+    {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[parameters('frontEndNICBarracuda1Name')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/loadBalancers/', parameters('loadBalancerName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "frontEndNICBarracuda1",
+            "properties": {
+              "enableIPForwarding": true,
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('frontEndNICBarracuda1IP')]",
+              "subnet": {
+                "id": "[variables('frontEndRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[concat(variables('loadBalancerID'), '/backendAddressPools/LoadBalancerBackend')]"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[parameters('backEndNICBarracuda1Name')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "backEndNICBarracuda1",
+            "properties": {
+              "enableIPForwarding": true,
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('backEndNICBarracuda1IP')]",
+              "subnet": {
+                "id": "[variables('backEndRef')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[parameters('frontEndNICBarracuda2Name')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/loadBalancers/', parameters('loadBalancerName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "frontEndNICBarracuda2",
+            "properties": {
+              "enableIPForwarding": true,
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('frontEndNICBarracuda2IP')]",
+              "subnet": {
+                "id": "[variables('frontEndRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[concat(variables('loadBalancerID'), '/backendAddressPools/LoadBalancerBackend')]"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[parameters('backEndNICBarracuda2Name')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "backEndNICBarracuda2",
+            "properties": {
+              "enableIPForwarding": true,
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('backEndNICBarracuda2IP')]",
+              "subnet": {
+                "id": "[variables('backEndRef')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2015-06-15",
+      "name": "[parameters('loadBalancerName')]",
+      "type": "Microsoft.Network/loadBalancers",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', parameters('loadBalancerPublicIPName'))]"
+      ],
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "loadBalancerFrontEnd",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[variables('loadBalancerPublicIPID')]"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "loadBalancerBackend"
+          }
+        ],
+        "inboundNatRules": [
+        ],
+        "loadBalancingRules": [
+          {
+            "name": "HTTPS",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[variables('frontEndIPConfigID')]"
+              },
+              "backendAddressPool": {
+                "id": "[variables('loadBalancerPoolID')]"
+              },
+              "protocol": "tcp",
+              "frontendPort": 443,
+              "backendPort": 443,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 5,
+              "loadDistribution": "sourceIPProtocol",
+              "probe": {
+                "id": "[variables('loadBalancerProbeID')]"
+              }
+            }
+          },
+          {
+            "name": "SFTP",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[variables('frontEndIPConfigID')]"
+              },
+              "backendAddressPool": {
+                "id": "[variables('loadBalancerPoolID')]"
+              },
+              "protocol": "tcp",
+              "frontendPort": 22,
+              "backendPort": 22,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 5,
+              "loadDistribution": "sourceIPProtocol",
+              "probe": {
+                "id": "[variables('loadBalancerProbeID')]"
+              }
+            }
+          }
+        ],
+        "probes": [
+          {
+            "name": "tcpProbe",
+            "properties": {
+              "protocol": "tcp",
+              "port": 443,
+              "intervalInSeconds": "5",
+              "numberOfProbes": "2"
+            }
+          }
+        ]
+      }
+    }    
+  ]
+}
