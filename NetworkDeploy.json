@@ -1,0 +1,109 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "backEndSubnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Backend Subnet Name"
+      }
+    },
+    "backEndSubnetRange": {
+      "type": "string",
+      "metadata": {
+        "description": "Backend Subnet Range"
+      }
+    },
+    "gatewaySubnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "gateway Subnet Name"
+      }
+    },
+    "gatewaySubnetRange": {
+      "type": "string",
+      "metadata": {
+        "description": "gateway Subnet Range"
+      }
+    },
+    "frontEndSubnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Frontend Subnet Name"
+      }
+    },
+    "frontEndSubnetRange": {
+      "type": "string",
+      "metadata": {
+        "description": "Frontend Subnet Range"
+      }
+    },
+    "location": {
+      "type": "String",
+      "allowedValues": [
+        "East US",
+        "West US",
+        "West Europe",
+        "North Europe"
+      ],
+      "metadata": {
+        "description": "Deployment location"
+      }
+    },
+    "vNETAddressPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "VNET address prefix"
+      }
+    },
+    "vNETName": {
+      "type": "string",
+      "metadata": {
+        "description": "VNET IP range"
+      }
+    }
+  },
+  "variables": {
+    "backEndRef": "[concat(variables('vnetID'),'/subnets/',parameters('backEndSubnetName'))]",
+    "frontEndRef": "[concat(variables('vnetID'),'/subnets/',parameters('frontEndSubnetName'))]",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vNETName'))]",
+    "frontsubname": "[concat(parameters('frontEndSubnetName'),'_',replace(parameters('frontEndSubnetRange'),'/','_'))]",
+    "backsubname": "[concat(parameters('backEndSubnetName'),'_',replace(parameters('backEndSubnetRange'),'/','_'))]",
+    "gatsubname": "[concat(parameters('gatewaySubnetName'),'_',replace(parameters('gatewaySubnetRange'),'/','_'))]"
+  },
+  "resources": [
+    {
+      "name": "[parameters('vNETName')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[parameters('location')]",
+      "apiVersion": "2015-06-15",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('vNETAddressPrefix')]"
+          ]
+        },
+        "subnets": [
+            {
+                "name": "[variables('frontsubname')]",
+                "properties": {
+                    "addressPrefix": "[parameters('frontEndSubnetRange')]"
+                }
+            },
+            {
+                "name": "[variables('backsubname')]",
+                "properties": {
+                    "addressPrefix": "[parameters('backEndSubnetRange')]"
+                }
+            },
+            {
+                "name": "[variables('gatsubname')]",
+                "properties": {
+                    "addressPrefix": "[parameters('gatewaySubnetRange')]"
+                }
+            }
+        ]
+      }
+    }
+  ]
+}
