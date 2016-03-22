@@ -320,14 +320,7 @@
                             "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adPDCNicName'))]"
                         }
                     ]
-                },
-                "diagnosticsProfile": {
-                    "bootDiagnostics": {
-                        "enabled": "true",
-                        "storageUri": "[concat('http://',parameters('diagStorageAccountName'),'.blob.core.windows.net')]"
-                    }
                 }
-
             },
             "resources": [
                 {
@@ -419,12 +412,6 @@
                             "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adBDCNicName'))]"
                         }
                     ]
-                },
-                "diagnosticsProfile": {
-                    "bootDiagnostics": {
-                        "enabled": "true",
-                        "storageUri": "[concat('http://',parameters('diagStorageAccountName'),'.blob.core.windows.net')]"
-                    }
                 }
             }
         },
