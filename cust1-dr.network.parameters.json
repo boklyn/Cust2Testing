@@ -1,0 +1,20 @@
+﻿{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "webtiersubnetname": { "value": "EVHE2DM-SUB-005" },
+        "webtiersubnetrange": { "value": "172.25.2.0/24" },
+        "gatewaySubnetName": { "value": "GatewaySubnet" },
+        "gatewaySubnetRange": { "value": "172.25.0.0/28" },
+        "apptiersubnetname": { "value": "EVHE2DM-SUB-006" },
+        "apptiersubnetrange": { "value": "172.25.8.0/24" },
+        "admintiersubnetname": { "value": "EVHE2DM-SUB-007" },
+        "admintiersubnetrange": { "value": "172.25.14.0/24" },
+        "datatiersubnetname": { "value": "EVHE2DM-SUB-008" },
+        "datatiersubnetrange": { "value": "172.25.12.0/24" },
+        "location": { "value": "East US" },
+        "vNETAddressPrefix": { "value": "172.25.0.0/20" },
+        "vNETName": { "value": "EVHE2DM-VNET-002" },
+        "DNSServerAddress": { "value": [ "172.25.14.4","172.25.14.5" ] }
+    }
+}
