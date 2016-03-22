@@ -12,7 +12,7 @@
         "admintiersubnetrange": { "value": "172.25.14.0/24" },
         "datatiersubnetname": { "value": "evhe2dm-sub-008" },
         "datatiersubnetrange": { "value": "172.25.12.0/24" },
-        "location": { "value": "East Us" },
+        "location": { "value": "East US" },
         "vnetaddressprefix": { "value": "172.25.0.0/20" },
         "vnetname": { "value": "evhe2dm-vnet-002" },
         "dnsserveraddress": { "value": [ "172.25.14.4","172.25.14.5" ] }
