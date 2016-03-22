@@ -21,7 +21,7 @@
             },
             "allowedValues": [
                 "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-dr.network.parameters.json",
-                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-DomainControllers.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-dr.domaincontrollers.parameters.json",
                 "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-dr.s2s.parameters.json",
                 "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-webtier.parameters.json",
                 "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-apptier.appsvrs.parameters.json",
