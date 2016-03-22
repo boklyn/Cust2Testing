@@ -3,31 +3,34 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "VHDStorageAccountName": {
-      "value": "evhe2dmstor01"
+        "value": "evhe1drstor01"
+    },
+    "diagStorageAccountName": {
+      "value": "evhe2drstor02"
     },
     "location": {
       "value": "East US"
     },
     "adPDCNicName": {
-      "value": "evhe2dm-nic-001"
+      "value": "evhe1dr-nic-001"
     },
     "adPDCNicIPAddress": {
-      "value": "172.24.14.4"
+      "value": "172.25.14.4"
     },
     "adBDCNicName": {
       "value": "evhe2dm-nic-002"
     },
     "adBDCNicIPAddress": {
-      "value": "172.24.14.5"
+      "value": "172.25.14.5"
     },
     "adPDCVMName": {
-      "value": "evhe2dm-svr-001"
+      "value": "evhe2dm-prad-01"
     },
     "adBDCVMName": {
-      "value": "evhe2dm-svr-002"
+      "value": "evhe2dm-prad-02"
     },
     "adminUsername": {
-      "value": "evoadmin"
+      "value": "evoladm"
     },
     "adminPassword": {
       "value": "iVcMpEhwVkOUdIQP4xFx"
@@ -36,16 +39,16 @@
       "value": "Standard_D1"
     },
     "adAvailabilitySetName": {
-      "value": "EVHE2DM-ASet-001"
+      "value": "evhe1dr-aset-001"
     },
     "domainName": {
-      "value": "azureqa.corp.evolenthealth.com"
+      "value": "prod.corp.evolenthealth.com"
     },
     "assetLocation": {
       "value": "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/"
     },
     "vnetname": {
-      "value": "EVHE2DM-VNET-001"
+      "value": "evhe1dr-vnet-001"
     },
     "adsubname": {
       "value": "EVHE2DM-SUB-003_172.24.14.0_24"
