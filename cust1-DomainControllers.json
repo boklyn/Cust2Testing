@@ -28,6 +28,12 @@
             },
             "defaultValue": "Standard_LRS"
         },
+        "vnetrgpname": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource group where the vnet is located. "
+            }
+        },
         "location": {
             "type": "string",
             "allowedValues": [
@@ -181,7 +187,7 @@
         }
     },
     "variables": {
-        "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetname'))]",
+        "VnetID": "[resourceId(parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('vnetname'))]",
         "adSubnetRef": "[concat(variables('VnetID'),'/subnets/',parameters('adSubName'))]",
         "adPDCDataDisk": "EVHADPDCDataDisk",
         "adBDCDataDisk": "EVHADBDCDataDisk",

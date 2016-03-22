@@ -8,6 +8,9 @@
     "diagStorageAccountName": {
       "value": "evhe1drstor02"
     },
+    "vnetrgpname": {
+      "value": "EVHE1-RGP-001"
+    },
     "location": {
       "value": "East US"
     },
