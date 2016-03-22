@@ -189,8 +189,6 @@
     "variables": {
         "VnetID": "[resourceId(parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('vnetname'))]",
         "adSubnetRef": "[concat(variables('VnetID'),'/subnets/',parameters('adSubName'))]",
-        "adPDCDataDisk": "EVHADPDCDataDisk",
-        "adBDCDataDisk": "EVHADBDCDataDisk",
         "adDataDiskSize": 200,
         "adPDCModulesURL": "[concat(parameters('assetLocation'),'CreateADPDC.ps1.zip')]",
         "adPDCConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",

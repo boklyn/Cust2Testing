@@ -15,22 +15,22 @@
       "value": "East US"
     },
     "adPDCNicName": {
-      "value": "evhe1dr-nic-001"
+      "value": "evhe1-nic-001"
     },
     "adPDCNicIPAddress": {
       "value": "172.25.14.4"
     },
     "adBDCNicName": {
-      "value": "evhe1dm-nic-002"
+      "value": "evhe1-nic-002"
     },
     "adBDCNicIPAddress": {
       "value": "172.25.14.5"
     },
     "adPDCVMName": {
-      "value": "evhe1dm-prad-01"
+      "value": "evhe1-prad-001"
     },
     "adBDCVMName": {
-      "value": "evhe1dm-prad-02"
+      "value": "evhe1-prad-002"
     },
     "adminUsername": {
       "value": "evoladm"
@@ -42,7 +42,7 @@
       "value": "Standard_D1"
     },
     "adAvailabilitySetName": {
-      "value": "evhe1dr-aset-001"
+      "value": "evhe1-aset-001"
     },
     "domainName": {
       "value": "prod.corp.evolenthealth.com"
@@ -54,7 +54,7 @@
       "value": "evhe1dr-vnet-001"
     },
     "adsubname": {
-      "value": "evhe1dm-sub-003_172.25.14.0_24"
+      "value": "evhe1dr-sub-003_172.25.14.0_24"
     }
   }
 }
