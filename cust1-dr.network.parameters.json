@@ -2,19 +2,19 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "webtiersubnetname": { "value": "evhe2dm-sub-005" },
+        "webtiersubnetname": { "value": "evhe1dm-sub-005" },
         "webtiersubnetrange": { "value": "172.25.2.0/24" },
         "gatewaySubnetName": { "value": "GatewaySubnet" },
         "gatewaySubnetRange": { "value": "172.25.0.0/28" },
-        "apptiersubnetname": { "value": "evhe2dm-sub-006" },
+        "apptiersubnetname": { "value": "evhe1dm-sub-006" },
         "apptiersubnetrange": { "value": "172.25.8.0/24" },
-        "admintiersubnetname": { "value": "evhe2dm-sub-007" },
+        "admintiersubnetname": { "value": "evhe1dm-sub-007" },
         "admintiersubnetrange": { "value": "172.25.14.0/24" },
-        "datatiersubnetname": { "value": "evhe2dm-sub-008" },
+        "datatiersubnetname": { "value": "evhe1dm-sub-008" },
         "datatiersubnetrange": { "value": "172.25.12.0/24" },
         "location": { "value": "East US" },
         "vnetaddressprefix": { "value": "172.25.0.0/20" },
-        "vnetname": { "value": "evhe2dm-vnet-002" },
+        "vnetname": { "value": "evhe1dm-vnet-002" },
         "dnsserveraddress": { "value": [ "172.25.14.4","172.25.14.5" ] }
     }
 }
