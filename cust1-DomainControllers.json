@@ -8,6 +8,12 @@
                 "description": "The name of the new storage account created to store the VMs disks. Remmber reccomended max vhd disk is 40"
             }
         },
+        "diagStorageAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the new storage account created to store the VMs disks. Remmber reccomended max vhd disk is 40"
+            }
+        },
         "storageAccountType": {
             "type": "string",
             "allowedValues": [
@@ -199,6 +205,15 @@
             }
         },
         {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('diagStorageAccountName')]",
+            "apiVersion": "2015-05-01-preview",
+            "location": "[parameters('location')]",
+            "properties": {
+                "accountType": "[parameters('storageAccountType')]"
+            }
+        },
+        {
             "type": "Microsoft.Compute/availabilitySets",
             "name": "[parameters('adAvailabilitySetName')]",
             "apiVersion": "2015-05-01-preview",
@@ -251,6 +266,7 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts',parameters('VHDStorageAccountName'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts',parameters('diagStorageAccountName'))]",
                 "[resourceId('Microsoft.Network/networkInterfaces',parameters('adPDCNicName'))]",
                 "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
             ],
@@ -276,7 +292,7 @@
                     "osDisk": {
                         "name": "osdisk",
                         "vhd": {
-                             "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('adPDCVMName'),'/',parameters('adPDCVMName'),'-1.vhd')]"
+                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('adPDCVMName'),'/',parameters('adPDCVMName'),'-1.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -300,7 +316,18 @@
                             "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adPDCNicName'))]"
                         }
                     ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "true",
+                        "storageUri": "[concat('http://',parameters('diagStorageAccountName'),'.blob.core.windows.net')]"
+                    },
+                    "basicmetrics": {
+                        "enabled": "true",
+                        "storageUri": "[concat('http://',parameters('diagStorageAccountName'),'.blob.core.windows.net')]"
+                    }
                 }
+
             },
             "resources": [
                 {
@@ -335,79 +362,6 @@
                     }
                 }
             ]
-        },
-        {
-            "name": "UpdateVNetDNS1",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
-            "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/', parameters('adPDCVMName'),'/extensions/CreateADForest')]"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[variables('vnetwithDNSTemplateUri')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "webtiersubnetname": { "value": "EVHE2DM-SUB-001" },
-                    "webtiersubnetrange": { "value": "172.24.2.0/24" },
-                    "gatewaySubnetName": { "value": "GatewaySubnet" },
-                    "gatewaySubnetRange": { "value": "172.24.0.0/28" },
-                    "apptiersubnetname": { "value": "EVHE2DM-SUB-002" },
-                    "apptiersubnetrange": { "value": "172.24.8.0/24" },
-                    "admintiersubnetname": { "value": "EVHE2DM-SUB-003" },
-                    "admintiersubnetrange": { "value": "172.24.14.0/24" },
-                    "datatiersubnetname": { "value": "EVHE2DM-SUB-004" },
-                    "datatiersubnetrange": { "value": "172.24.12.0/24" },
-                    "location": { "value": "East US" },
-                    "vNETAddressPrefix": { "value": "172.24.0.0/20" },
-                    "vNETName": { "value": "EVHE2DM-VNET-001" },
-                    "DNSServerAddress": { "value": [ "[parameters('adPDCNicIPAddress')]" ] }
-                }
-            }
-        },
-        {
-            "name": "UpdateBDCNIC",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
-            "dependsOn": [
-                "Microsoft.Resources/deployments/UpdateVNetDNS1"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[variables('nicTemplateUri')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "nicName": {
-                        "value": "[parameters('adBDCNicName')]"
-                    },
-                    "ipConfigurations": {
-                        "value": [
-                            {
-                                "name": "ipconfig1",
-                                "properties": {
-                                    "privateIPAllocationMethod": "Static",
-                                    "privateIPAddress": "[parameters('adBDCNicIPAddress')]",
-                                    "subnet": {
-                                        "id": "[variables('adSubnetRef')]"
-                                    }
-                                }
-                            }
-                        ]
-                    },
-                    "dnsServers": {
-                        "value": [
-                            "[parameters('adPDCNicIPAddress')]"
-                        ]
-                    }
-                }
-            }
         },
         {
             "apiVersion": "2015-05-01-preview",
@@ -449,7 +403,7 @@
                     "dataDisks": [
                         {
                             "vhd": {
-                               "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('adBDCVMName'),'/',parameters('adBDCVMName'),'-2.vhd')]"
+                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('adBDCVMName'),'/',parameters('adBDCVMName'),'-2.vhd')]"
                             },
                             "name": "[concat(parameters('adBDCVMName'),'-data-disk1')]",
                             "caching": "None",
@@ -499,43 +453,6 @@
                     }
                 }
             }
-        },
-        {
-            "name": "UpdateVNetDNS2",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
-            "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/',parameters('adBDCVMName'),'/extensions/CreateBDC')]"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[variables('vnetwithDNSTemplateUri')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "webtiersubnetname": { "value": "EVHE2DM-SUB-001" },
-                    "webtiersubnetrange": { "value": "172.24.2.0/24" },
-                    "gatewaySubnetName": { "value": "GatewaySubnet" },
-                    "gatewaySubnetRange": { "value": "172.24.0.0/28" },
-                    "apptiersubnetname": { "value": "EVHE2DM-SUB-002" },
-                    "apptiersubnetrange": { "value": "172.24.8.0/24" },
-                    "admintiersubnetname": { "value": "EVHE2DM-SUB-003" },
-                    "admintiersubnetrange": { "value": "172.24.14.0/24" },
-                    "datatiersubnetname": { "value": "EVHE2DM-SUB-004" },
-                    "datatiersubnetrange": { "value": "172.24.12.0/24" },
-                    "location": { "value": "East US" },
-                    "vNETAddressPrefix": { "value": "172.24.0.0/20" },
-                    "vNETName": { "value": "EVHE2DM-VNET-001" },
-                    "DNSServerAddress": {
-                        "value": [
-                            "[parameters('adPDCNicIPAddress')]",
-                            "[parameters('adBDCNicIPAddress')]"
-                        ]
-                    }
-                }
-            }
         }
-
     ]
 }
