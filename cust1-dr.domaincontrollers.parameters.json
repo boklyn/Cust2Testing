@@ -3,10 +3,10 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "VHDStorageAccountName": {
-        "value": "evhe1drstor01"
+        "value": "evhe1stor01"
     },
     "diagStorageAccountName": {
-      "value": "evhe1drstor02"
+      "value": "evhe1stor02"
     },
     "vnetrgpname": {
       "value": "EVHE1-RGP-001"
