@@ -20,7 +20,7 @@
                 "description": "Different Parameters files choice"
             },
             "allowedValues": [
-                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-network.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-dr.network.parameters.json",
                 "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-DomainControllers.parameters.json",
                 "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-s2s.parameters.json",
                 "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust1-webtier.parameters.json",
