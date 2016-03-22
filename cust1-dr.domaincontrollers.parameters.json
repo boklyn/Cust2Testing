@@ -6,7 +6,7 @@
         "value": "evhe1drstor01"
     },
     "diagStorageAccountName": {
-      "value": "evhe2drstor02"
+      "value": "evhe1drstor02"
     },
     "location": {
       "value": "East US"
@@ -18,16 +18,16 @@
       "value": "172.25.14.4"
     },
     "adBDCNicName": {
-      "value": "evhe2dm-nic-002"
+      "value": "evhe1dm-nic-002"
     },
     "adBDCNicIPAddress": {
       "value": "172.25.14.5"
     },
     "adPDCVMName": {
-      "value": "evhe2dm-prad-01"
+      "value": "evhe1dm-prad-01"
     },
     "adBDCVMName": {
-      "value": "evhe2dm-prad-02"
+      "value": "evhe1dm-prad-02"
     },
     "adminUsername": {
       "value": "evoladm"
@@ -51,7 +51,7 @@
       "value": "evhe1dr-vnet-001"
     },
     "adsubname": {
-      "value": "evhe2dm-sub-003_172.25.14.0_24"
+      "value": "evhe1dm-sub-003_172.25.14.0_24"
     }
   }
 }
