@@ -15,6 +15,6 @@
         "location": { "value": "East US" },
         "vnetaddressprefix": { "value": "172.25.0.0/20" ,
         "vnetname": { "value": "evhe1dr-vnet-001" }},
-        "DNSServerAddress": { "value": ["172.25.14.4", "172.25.14.5"] }
+        "dnsservers": { "value": ["172.25.14.4", "172.25.14.5"] }
     }
 }

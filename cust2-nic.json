@@ -32,15 +32,7 @@
             "metadata": {
                 "Description": "The DNS Servers of the NIC"
             }
-        },
-        "rgname": {
-            "type": "array",
-            "metadata": {
-                "Description": "The DNS Servers of the NIC"
-            },
-            "defaultValue": "[resourceGroup().name]"
         }
-
     },
     "resources": [
         {
