@@ -390,7 +390,7 @@
                     },
                     "dnsServers": {
                         "value": [
-                            "[parameters('adPDCNicIPAddress'),parameters('adBDCNicIPAddress')]"
+                            ["[parameters('adPDCNicIPAddress')]","[parameters('adBDCNicIPAddress')]"]
                         ]
                     }
                 }
