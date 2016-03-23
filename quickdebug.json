@@ -1,0 +1,56 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "rgname": {
+            "type": "string",
+            "metadata": {
+                "description": "The vnet name of where to place the domain controllers"
+            },
+            "defaultValue": "EVHE1-RGP-001"
+        }
+    },
+    "variables": {
+        "VnetID": "[resourceId(parameters('rgname'), 'Microsoft.Network/virtualNetworks', 'evhe1dr-vnet-001')]",
+        "adSubnetRef": "[concat(variables('VnetID'),'/subnets/evhe1dr-sub-003_172.25.14.0_24')]"
+    },
+    "resources": [
+        {
+            "name": "UpdateBDCNIC",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-nic.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "East US"
+                    },
+                    "nicName": {
+                        "value": "evhe1-nic-002"
+                    },
+                    "ipConfigurations": {
+                        "value": [
+                            {
+                                "name": "ipconfig1",
+                                "properties": {
+                                    "privateIPAllocationMethod": "Static",
+                                    "privateIPAddress": "172.25.14.5",
+                                    "subnet": {
+                                        "id": "[variables('adSubnetRef')]"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "dnsServers": {
+                        "value": [ "172.25.14.4" ]
+                    }
+                }
+            }
+        }
+    ]
+}

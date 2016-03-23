@@ -32,7 +32,8 @@
             "type": "string",
             "metadata": {
                 "description": "Resource group where the vnet is located. "
-            }
+            },
+            "defaultValue": "[resourceGroup().name]"
         },
         "location": {
             "type": "string",
@@ -356,7 +357,7 @@
                     }
                 }
             ]
-        },        
+        },
         {
             "name": "UpdateBDCNIC",
             "type": "Microsoft.Resources/deployments",
@@ -390,7 +391,8 @@
                     },
                     "dnsServers": {
                         "value": [
-                            ["[parameters('adPDCNicIPAddress')]","[parameters('adBDCNicIPAddress')]"]
+                            "[parameters('adPDCNicIPAddress')]",
+                            "[parameters('adBDCNicIPAddress')]"
                         ]
                     }
                 }
@@ -485,7 +487,7 @@
                     }
                 }
             }
-        },        
+        },
         {
             "name": "UpdateVNetDNS1",
             "type": "Microsoft.Resources/deployments",
