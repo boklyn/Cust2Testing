@@ -191,12 +191,13 @@
         "adSubnetRef": "[concat(variables('VnetID'),'/subnets/',parameters('adSubName'))]",
         "adDataDiskSize": 200,
         "adPDCModulesURL": "[concat(parameters('assetLocation'),'CreateADPDC.ps1.zip')]",
+        "vnetwithdnsparams": "[concat(parameters('assetLocation'),'cust2-dr.networkdns.parameters.json')]",
         "adPDCConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
         "adBDCConfigurationFunction": "CreateADBDC.ps1\\CreateADBDC",
         "adBDCModulesURL": "[concat(parameters('assetLocation'),'CreateADBDC.ps1.zip')]",
         "vnetTemplateUri": "[concat(parameters('assetLocation'),'vnet.json')]",
-        "nicTemplateUri": "[concat(parameters('assetLocation'),'nic.json')]",
-        "vnetwithDNSTemplateUri": "[concat(parameters('assetLocation'),'cust1-network.json')]"
+        "nicTemplateUri": "[concat(parameters('assetLocation'),'cust2-nic.json')]",
+        "vnetwithDNSTemplateUri": "[concat(parameters('assetLocation'),'cust2-network.json')]"
     },
     "resources": [
         {
@@ -355,6 +356,45 @@
                     }
                 }
             ]
+        },        
+        {
+            "name": "UpdateBDCNIC",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('nicTemplateUri')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "nicName": {
+                        "value": "[parameters('adBDCNicName')]"
+                    },
+                    "ipConfigurations": {
+                        "value": [
+                            {
+                                "name": "ipconfig1",
+                                "properties": {
+                                    "privateIPAllocationMethod": "Static",
+                                    "privateIPAddress": "[parameters('adBDCNicIPAddress')]",
+                                    "subnet": {
+                                        "id": "[variables('adSubnetRef')]"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "dnsServers": {
+                        "value": [
+                            "[parameters('adPDCNicIPAddress'),parameters('adBDCNicIPAddress')]"
+                        ]
+                    }
+                }
+            }
         },
         {
             "apiVersion": "2015-05-01-preview",
@@ -443,6 +483,25 @@
                     "Items": {
                         "AdminPassword": "[parameters('adminPassword')]"
                     }
+                }
+            }
+        },        
+        {
+            "name": "UpdateVNetDNS1",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('adPDCVMName'),'/extensions/CreateADForest')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('vnetwithDNSTemplateUri')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[variables('vnetwithdnsparams')]",
+                    "contentVersion": "1.0.0.0"
                 }
             }
         }

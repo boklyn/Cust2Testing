@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "deploychoice": {
+            "type": "string",
+            "metadata": {
+                "description": "Environment to Deploy"
+            },
+            "allowedValues": [
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-network.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-DomainControllers.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-s2s.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-apptier.twosvrdeploy.json"
+            ]
+        },
+        "paramchoice": {
+            "type": "string",
+            "metadata": {
+                "description": "Different Parameters files choice"
+            },
+            "allowedValues": [
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-dr.network.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-dr.domaincontrollers.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-dr.s2s.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-webtier.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-apptier.appsvrs.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-apptier.edwvrs.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-apptier.rulessvrs.parameters.json"
+            ]
+        }
+
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-01-01",
+            "name": "ProductionDeployment",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[parameters('deploychoice')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[parameters('paramchoice')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        }
+    ]
+}
