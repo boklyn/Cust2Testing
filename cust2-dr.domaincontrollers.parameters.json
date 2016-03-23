@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "VHDStorageAccountName": {
-        "value": "evhe1stor01"
+      "value": "evhe1stor01"
     },
     "diagStorageAccountName": {
       "value": "evhe1stor02"
@@ -48,7 +48,7 @@
       "value": "prod.corp.evolenthealth.com"
     },
     "assetLocation": {
-      "value": "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/"
+      "value": "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/"
     },
     "vnetname": {
       "value": "evhe1dr-vnet-001"

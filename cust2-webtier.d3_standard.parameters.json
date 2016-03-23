@@ -1,0 +1,66 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VHDStorageAccountName": {
+            "value": "evhe2dmstor01"
+        },
+        "existingVNETName": {
+            "value": "evhe1dr-vnet-001"
+        },
+        "vnetrgpname": {
+            "value": "EVHE1-RGP-001"
+        },
+        "existingSubnetName": {
+            "value": "evhe2dm-sub-002_172.25.2.0_24"
+        },
+        "webvmSize": {
+            "value": "Standard_DS3"
+        },
+        "domainToJoin": {
+            "value": "prod.corp.evolenthealth.com"
+        },
+        "domainUsername": {
+            "value": "evoladm"
+        },
+        "domainPassword": {
+            "value": "iVcMpEhwVkOUdIQP4xFx"
+        },
+        "ouPath": {
+            "value": ""
+        },
+        "domainJoinOptions": {
+            "value": 3
+        },
+        "vmAdminUsername": {
+            "value": "evollocadm"
+        },
+        "vmAdminPassword": {
+            "value": "P@ssword!"
+        },
+        "webvmstaticips": {
+            "value": [ "172.25.2.4", "172.25.2.5", "172.25.2.6", "172.25.2.7" ]
+        },
+        "websiteoffset": {
+            "value": 1
+        },
+        "nicoffset": {
+            "value": 1
+        },
+        "sitecount": {
+            "value": 4
+        },
+        "nicnameformat": {
+            "value": "evhe1dr-nic-"
+        },
+        "vmnameformat": {
+            "value": [ "evhe1dr-idwb-01", "evhe1dr-idwb-02", "evhe1dr-msap-01", "evhe1dr-ftp-01" ]
+        }
+    },
+    "outputs": {
+        "dataDiskArray": {
+            "type": "array",
+            "value": "[variables('disksArray')[parameters('numDataDisks')]]"
+        }
+    }
+}

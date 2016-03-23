@@ -92,12 +92,19 @@
             "metadata": {
                 "Description": "The DNS address(es) of the DNS Server(s) used by the VNET"
             }
+        },
+        "vnetrgpname": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource group where the vnet is located. "
+            },
+            "defaultValue": "[resourceGroup().name]"
         }
     },
     "variables": {
         "webtierref": "[concat(variables('vnetID'),'/subnets/',parameters('webtiersubnetname'))]",
         "frontEndRef": "[concat(variables('vnetID'),'/subnets/',parameters('apptiersubnetname'))]",
-        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vNETName'))]",
+        "vnetID": "[resourceId(parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('vNETName'))]",
         "apitiersubname": "[concat(parameters('apptiersubnetname'),'_',replace(parameters('apptiersubnetrange'),'/','_'))]",
         "webtiersubname": "[concat(parameters('webtiersubnetname'),'_',replace(parameters('webtiersubnetrange'),'/','_'))]",
         "datatiersubname": "[concat(parameters('datatiersubnetname'),'_',replace(parameters('datatiersubnetrange'),'/','_'))]",
