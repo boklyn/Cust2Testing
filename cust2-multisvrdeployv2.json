@@ -221,7 +221,7 @@
                             "subnet": {
                                 "id": "[variables('subnetId')]"
                             },
-                            "publicIPAddress": "[reference('getpubipoptions').outputs.dataDiskArray.value]"               
+                            "publicIPAddress": "[reference('getpubipoptions').outputs.publicipdata.value]"               
                         }
                     }
                 ]
