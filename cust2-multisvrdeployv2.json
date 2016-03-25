@@ -145,7 +145,16 @@
         "vnetID": "[resourceId(parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
         "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]",
         "diskCaching": "ReadWrite",
-        "storageaccounttype": "Standard_LRS"
+        "storageaccounttype": "Standard_LRS",
+        "ipcode":{
+                    "type": "object",
+                    "privateIPAllocationMethod": "Static",
+                    "privateIPAddress": "172.25.2.15",
+                    "subnet": {
+                        "id": "[variables('subnetId')]"
+                    }
+                }
+   
     },
     "resources": [
         {
@@ -218,7 +227,7 @@
                 "ipConfigurations": [
                     {
                         "name": "ipconfig",
-                        "properties": "[reference('getpubipoptions').outputs.publicipdata.value]"
+                        "properties": "[variables('ipcode')[0]]"
                     }
                 ]
             }
