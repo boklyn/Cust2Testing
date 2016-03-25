@@ -285,7 +285,7 @@
             "value": "[variables('disksArray')[parameters('numDataDisks')]]"
         },
         "publicipdata": { 
-            "type": "array",
+            "type": "object",
             "value": "[variables('publicip')[parameters('enablepubip')]]"
         }
     }
