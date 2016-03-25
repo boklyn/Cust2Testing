@@ -188,13 +188,13 @@
                         "value": ""
                     },
                     "diskCaching": {
-                        "value": ""
+                        "value": "None"
                     },
                     "folderpath": {
                         "value": ""
                     },
                     "disksizes": {
-                        "value": ""
+                        "value": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
                     },
                     "enablepubip": {
                         "value": "no"
@@ -215,14 +215,7 @@
                 "ipConfigurations": [
                     {
                         "name": "ipconfig",
-                        "properties": {
-                            "privateIPAllocationMethod": "Static",
-                            "privateIPAddress": "[parameters('vmstaticips')[copyIndex()]]",
-                            "subnet": {
-                                "id": "[variables('subnetId')]"
-                            },
-                            "publicIPAddress": "[reference('getpubipoptions').outputs.publicipdata.value]"               
-                        }
+                        "properties": 
                     }
                 ]
             }

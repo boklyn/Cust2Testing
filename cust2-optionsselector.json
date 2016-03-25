@@ -13,6 +13,12 @@
                 "description": ""
             }
         },
+        "subnetref": {
+            "type": "string",
+            "metadata": {
+                "description": ""
+            }
+        },
         "numDataDisks": {
             "type": "string",
             "allowedValues": [
@@ -249,10 +255,25 @@
             ]
         },
         "pubicip": {
-            "no": "",
+            "no": [                 
+                {
+                    "privateIPAllocationMethod": "Static",
+                    "privateIPAddress": "172.25.2.15",
+                    "subnet": {
+                        "id": "[parameters('subnetref')]"
+                    }
+                }
+            ],
             "yes": [
                 {
-                    "id": "[resourceId('Microsoft.Network/publicIPAddresses','boklynpip')]"
+                    "privateIPAllocationMethod": "Static",
+                    "privateIPAddress": "172.25.2.15",
+                    "subnet": {
+                        "id": "[parameters('subnetref')]"
+                    },
+                    "publicIPAddress": {
+                        "id": "[resourceId('Microsoft.Network/publicIPAddresses','boklynpip')]"
+                    }
                 }
             ]
         }
