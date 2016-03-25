@@ -3,6 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "enablepubip": {
+            "type": "string",
             "allowedValues": [
                 "yes",
                 "no"
