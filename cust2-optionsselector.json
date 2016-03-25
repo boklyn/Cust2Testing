@@ -2,6 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "enablepubip": {
+            "allowedValues": [
+                "yes",
+                "no"
+            ],
+            "defaultValue": "no",
+            "metadata": {
+                "description": ""
+            }
+        },
         "numDataDisks": {
             "type": "string",
             "allowedValues": [
@@ -236,6 +246,14 @@
                 "[variables('dataDisks')['11'][0]]",
                 "[variables('dataDisks')['12'][0]]"
             ]
+        },
+        "pubicip": {
+            "no": "",
+            "yes": [
+                {
+                    "id": "[resourceId('Microsoft.Network/publicIPAddresses','boklynpip')]"
+                }
+            ]
         }
     },
     "resources": [ ],
@@ -243,6 +261,10 @@
         "dataDiskArray": {
             "type": "array",
             "value": "[variables('disksArray')[parameters('numDataDisks')]]"
+        },
+        "publicipdata": { 
+            "type": "array",
+            "value": "[variables('publicip')[parameters('enablepubip')]]"
         }
     }
 }
