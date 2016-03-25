@@ -38,9 +38,6 @@
         "vmAdminPassword": {
             "value": "P@ssword!"
         },
-        "vmnumoffset": {
-            "value": 1
-        },
         "nicoffset": {
             "value": 1
         },

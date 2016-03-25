@@ -2,23 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "enablepubip": {
-            "type": "string",
-            "allowedValues": [
-                "yes",
-                "no"
-            ],
-            "defaultValue": "no",
-            "metadata": {
-                "description": ""
-            }
-        },
-        "subnetref": {
-            "type": "string",
-            "metadata": {
-                "description": ""
-            }
-        },
         "numDataDisks": {
             "type": "string",
             "allowedValues": [
@@ -253,29 +236,6 @@
                 "[variables('dataDisks')['11'][0]]",
                 "[variables('dataDisks')['12'][0]]"
             ]
-        },
-        "pubicip": {
-            "no": [                 
-                {
-                    "privateIPAllocationMethod": "Static",
-                    "privateIPAddress": "172.25.2.15",
-                    "subnet": {
-                        "id": "[parameters('subnetref')]"
-                    }
-                }
-            ],
-            "yes": [
-                {
-                    "privateIPAllocationMethod": "Static",
-                    "privateIPAddress": "172.25.2.15",
-                    "subnet": {
-                        "id": "[parameters('subnetref')]"
-                    },
-                    "publicIPAddress": {
-                        "id": "[resourceId('Microsoft.Network/publicIPAddresses','boklynpip')]"
-                    }
-                }
-            ]
         }
     },
     "resources": [ ],
@@ -283,10 +243,6 @@
         "dataDiskArray": {
             "type": "array",
             "value": "[variables('disksArray')[parameters('numDataDisks')]]"
-        },
-        "publicipdata": { 
-            "type": "object",
-            "value": "[variables('publicip')[parameters('enablepubip')]]"
         }
     }
 }

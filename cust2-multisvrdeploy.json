@@ -76,12 +76,6 @@
                 "description": "The password for the administrator account of the new VM and the domain"
             }
         },
-        "vmnumoffset": {
-            "type": "int",
-            "metadata": {
-                "description": "the website offsite count number "
-            }
-        },
         "nicoffset": {
             "type": "int",
             "metadata": {

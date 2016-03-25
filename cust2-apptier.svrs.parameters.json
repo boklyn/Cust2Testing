@@ -1,0 +1,225 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "diagStorageAccountName": {
+            "value": "evhe1drstor02"
+        },
+        "VHDStorageAccountName": {
+            "value": "evhe1drstor03"
+        },
+        "existingVNETName": {
+            "value": "evhe1dr-vnet-001"
+        },
+        "vnetrgpname": {
+            "value": "EVHE1-RGP-001"
+        },
+        "existingSubnetName": {
+            "value": "evhe1dr-sub-002_172.25.8.0_24"
+        },
+        "domainToJoin": {
+            "value": "prod.corp.evolenthealth.com"
+        },
+        "domainUsername": {
+            "value": "evoladm"
+        },
+        "domainPassword": {
+            "value": "iVcMpEhwVkOUdIQP4xFx"
+        },
+        "ouPath": {
+            "value": ""
+        },
+        "domainJoinOptions": {
+            "value": 3
+        },
+        "vmAdminUsername": {
+            "value": "evollocadm"
+        },
+        "vmAdminPassword": {
+            "value": "P@ssword!"
+        },
+        "nicoffset": {
+            "value": 6
+        },
+        "sitecount": {
+            "value": 29
+        },
+        "nicnameformat": {
+            "value": "evhe1dr-nic-"
+        },
+        "assetLocation": {
+            "value": "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/"
+        },
+        "vmnames": {
+            "value": [
+                "evhe1dr-mswb-01",
+                "evhe1dr-idap-01",
+                "evhe1dr-idap-02",
+                "evhe1dr-ewap-01",
+                "evhe1dr-ewap-02",
+                "evhe1dr-ewap-03",
+                "evhe1dr-file-01",
+                "evhe1dr-rule-01",
+                "evhe1dr-rule-02",
+                "evhe1dr-rule-03",
+                "evhe1dr-rule-04",
+                "evhe1dr-rule-05",
+                "evhe1dr-rule-06",
+                "evhe1dr-rule-07",
+                "evhe1dr-msap-02",
+                "evhe1dr-msap-03",
+                "evhe1dr-msap-04",
+                "evhe1dr-msap-05",
+                "evhe1dr-msap-06",
+                "evhe1dr-mswb-02",
+                "evhe1dr-mswb-03",
+                "evhe1dr-mswb-04",
+                "evhe1dr-mswb-05",
+                "evhe1dr-stap-01",
+                "evhe1dr-iqap-01",
+                "evhe1dr-hgap-01",
+                "evhe1dr-file-02",
+                "evhe1dr-ngap-01",
+                "evhe1dr-sqrs-01"
+            ]
+        },
+        "vmSizes": {
+            "value": [
+                "Standard_DS3",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS3",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS4",
+                "Standard_DS13",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS3",
+                "Standard_DS4",
+                "Standard_DS3"
+            ]
+        },
+        "vmstaticips": {
+            "value": [
+                "172.25.8.4",
+                "172.25.8.5",
+                "172.25.8.6",
+                "172.25.8.7",
+                "172.25.8.8",
+                "172.25.8.9",
+                "172.25.8.10",
+                "172.25.8.11",
+                "172.25.8.12",
+                "172.25.8.13",
+                "172.25.8.14",
+                "172.25.8.15",
+                "172.25.8.16",
+                "172.25.8.17",
+                "172.25.8.18",
+                "172.25.8.19",
+                "172.25.8.20",
+                "172.25.8.21",
+                "172.25.8.22",
+                "172.25.8.23",
+                "172.25.8.24",
+                "172.25.8.25",
+                "172.25.8.26",
+                "172.25.8.27",
+                "172.25.8.28",
+                "172.25.8.29",
+                "172.25.8.30",
+                "172.25.8.31",
+                "172.25.8.32"
+            ]
+        },
+        "diskcount": {
+            "value": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2,
+                1,
+                1
+            ]
+        },
+        "disksizes": {
+            "value": [
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 1000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+            ]
+        }
+    },
+    "outputs": {
+        "dataDiskArray": {
+            "type": "array",
+            "value": "[variables('disksArray')[parameters('numDataDisks')]]"
+        }
+    }
+}
