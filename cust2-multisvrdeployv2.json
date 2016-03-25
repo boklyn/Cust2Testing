@@ -167,6 +167,42 @@
             }
         },
         {
+            "apiVersion": "2015-01-01",
+            "name": "getpubipoptions",
+            "type": "Microsoft.Resources/deployments",
+            "copy": {
+                "name": "vmcopy",
+                "count": "[length(parameters('vmnames'))]"
+            },
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('assetLocation'), 'cust2-optionsselector', '.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "numDataDisks": {
+                        "value": "0"
+                    },
+                    "diskStorageAccountName": {
+                        "value": ""
+                    },
+                    "diskCaching": {
+                        "value": ""
+                    },
+                    "folderpath": {
+                        "value": ""
+                    },
+                    "disksizes": {
+                        "value": ""
+                    },
+                    "enablepubip": {
+                        "value": "no"
+                    }
+                }
+            }
+        },
+        {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Network/networkInterfaces",
             "name": "[concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset')))]",
@@ -184,7 +220,8 @@
                             "privateIPAddress": "[parameters('vmstaticips')[copyIndex()]]",
                             "subnet": {
                                 "id": "[variables('subnetId')]"
-                            }
+                            },
+                            "publicIPAddress": "[reference('getpubipoptions').outputs.dataDiskArray.value]"               
                         }
                     }
                 ]

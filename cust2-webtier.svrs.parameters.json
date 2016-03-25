@@ -2,8 +2,11 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "diagStorageAccountName": {
+            "value": "evhe1drstor02"
+        },
         "VHDStorageAccountName": {
-            "value": "evhe2dmstor01"
+            "value": "evhe1drstor01"
         },
         "existingVNETName": {
             "value": "evhe1dr-vnet-001"
@@ -12,10 +15,7 @@
             "value": "EVHE1-RGP-001"
         },
         "existingSubnetName": {
-            "value": "evhe2dm-sub-002_172.25.2.0_24"
-        },
-        "webvmSize": {
-            "value": "Standard_DS3"
+            "value": "evhe1dr-sub-001_172.25.2.0_24"
         },
         "domainToJoin": {
             "value": "prod.corp.evolenthealth.com"
@@ -38,23 +38,41 @@
         "vmAdminPassword": {
             "value": "P@ssword!"
         },
-        "webvmstaticips": {
-            "value": [ "172.25.2.4", "172.25.2.5", "172.25.2.6", "172.25.2.7" ]
-        },
-        "websiteoffset": {
+        "vmnumoffset": {
             "value": 1
         },
         "nicoffset": {
             "value": 1
         },
         "sitecount": {
-            "value": 4
+            "value": 5
         },
         "nicnameformat": {
             "value": "evhe1dr-nic-"
         },
-        "vmnameformat": {
-            "value": [ "evhe1dr-idwb-01", "evhe1dr-idwb-02", "evhe1dr-msap-01", "evhe1dr-ftp-01" ]
+        "assetLocation": {
+            "value": "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/"
+        },
+        "vmnames": {
+            "value": [ "evhe1dr-idwb-01", "evhe1dr-idwb-02", "evhe1dr-msap-01", "evhe1dr-ftp-01", "evhe1dr-orap-01" ]
+        },
+        "vmSizes": {
+            "value": [ "Standard_DS3", "Standard_DS3", "Standard_DS3", "Standard_DS3", "Standard_D5_v2" ]
+        },
+        "vmstaticips": {
+            "value": [ "172.25.2.4", "172.25.2.5", "172.25.2.6", "172.25.2.7", "172.25.2.8" ]
+        },
+        "diskcount": {
+            "value": [ 1, 1, 1, 1, 2 ]
+        },
+        "disksizes": {
+            "value": [                
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 1000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+            ]
         }
     },
     "outputs": {

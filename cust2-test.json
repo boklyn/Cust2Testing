@@ -1,0 +1,80 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "diagStorageAccountName": {
+            "value": "evhe1drstor05"
+        },
+        "VHDStorageAccountName": {
+            "value": "evhe1drstor06"
+        },
+        "existingVNETName": {
+            "value": "evhe1dr-vnet-001"
+        },
+        "vnetrgpname": {
+            "value": "EVHE1-RGP-001"
+        },
+        "existingSubnetName": {
+            "value": "evhe1dr-sub-001_172.25.2.0_24"
+        },
+        "domainToJoin": {
+            "value": "prod.corp.evolenthealth.com"
+        },
+        "domainUsername": {
+            "value": "evoladm"
+        },
+        "domainPassword": {
+            "value": "iVcMpEhwVkOUdIQP4xFx"
+        },
+        "ouPath": {
+            "value": ""
+        },
+        "domainJoinOptions": {
+            "value": 3
+        },
+        "vmAdminUsername": {
+            "value": "evollocadm"
+        },
+        "vmAdminPassword": {
+            "value": "P@ssword!"
+        },
+        "vmnumoffset": {
+            "value": 1
+        },
+        "nicoffset": {
+            "value": 12
+        },
+        "sitecount": {
+            "value": 1
+        },
+        "nicnameformat": {
+            "value": "evhe1dr-nic-"
+        },
+        "assetLocation": {
+            "value": "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/"
+        },
+        "vmnames": {
+            "value": [ "evhe1dr-bok-01"]
+        },
+        "vmSizes": {
+            "value": [ "Standard_DS3" ]
+        },
+        "vmstaticips": {
+            "value": [ "172.25.2.15" ]
+        },
+        "diskcount": {
+            "value": [ 0 ]
+        },
+        "disksizes": {
+            "value": [                
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+            ]
+        }
+    },
+    "outputs": {
+        "dataDiskArray": {
+            "type": "array",
+            "value": "[variables('disksArray')[parameters('numDataDisks')]]"
+        }
+    }
+}
