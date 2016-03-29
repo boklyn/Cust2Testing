@@ -17,7 +17,8 @@
                 "9",
                 "10",
                 "11",
-                "12"
+                "12",
+                "none"
             ],
             "metadata": {
                 "description": "This parameter allows the user to select the number of disks they want"
@@ -310,7 +311,7 @@
     "outputs": {
         "dataDiskArray": {
             "type": "array",
-            "value": "[variables('disksArray')[parameters('numDataDisks')]]"
+            "value": "[variables('disksArray')[parameters('none')]]"
         },
         "nicipconfig": {
             "type": "array",
