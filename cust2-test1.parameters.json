@@ -3,10 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "diagStorageAccountName": {
-            "value": "evhe1drstor05"
+            "value": "bokteststor01"
         },
         "VHDStorageAccountName": {
-            "value": "evhe1drstor06"
+            "value": "bokteststor02"
         },
         "existingVNETName": {
             "value": "evhe1dr-vnet-001"
@@ -15,7 +15,7 @@
             "value": "EVHE1-RGP-001"
         },
         "existingSubnetName": {
-            "value": "evhe1dr-sub-001_172.25.2.0_24"
+            "value": "evhe1dr-sub-004_172.25.12.0_24"
         },
         "domainToJoin": {
             "value": "prod.corp.evolenthealth.com"
@@ -38,11 +38,8 @@
         "vmAdminPassword": {
             "value": "P@ssword!"
         },
-        "vmnumoffset": {
-            "value": 1
-        },
         "nicoffset": {
-            "value": 12
+            "value": 50
         },
         "sitecount": {
             "value": 1
@@ -54,27 +51,39 @@
             "value": "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/"
         },
         "vmnames": {
-            "value": [ "evhe1dr-bok-01"]
+            "value": [
+                "evhe1dr-bkts-01"
+            ]
         },
         "vmSizes": {
-            "value": [ "Standard_DS3" ]
+            "value": [
+                "Standard_DS2"
+            ]
         },
         "vmstaticips": {
-            "value": [ "172.25.2.15" ]
+            "value": [
+                "172.25.12.20"
+            ]
         },
         "diskcount": {
-            "value": [ 0 ]
+            "value": [
+                0
+            ]
         },
         "disksizes": {
-            "value": [                
+            "value": [
                 [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
             ]
-        }
-    },
-    "outputs": {
-        "dataDiskArray": {
-            "type": "array",
-            "value": "[variables('disksArray')[parameters('numDataDisks')]]"
+        },
+        "enablepubip": {
+            "value": [
+                1
+            ]
+        },
+        "publiciplist": {
+            "value": [
+                "boklyntest"
+            ]
         }
     }
 }

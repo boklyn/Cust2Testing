@@ -76,12 +76,6 @@
                 "description": "The password for the administrator account of the new VM and the domain"
             }
         },
-        "vmnumoffset": {
-            "type": "int",
-            "metadata": {
-                "description": "the website offsite count number "
-            }
-        },
         "nicoffset": {
             "type": "int",
             "metadata": {
@@ -135,6 +129,18 @@
             "metadata": {
                 "description": "somethingelse"
             }
+        },
+        "enablepubip": {
+            "type": "array",
+            "metadata": {
+                "description": "an array representingwhether the public ip will be enabled. "
+            }
+        },
+        "publiciplist": {
+            "type": "array",
+            "metadata": {
+                "description": ""
+            }
         }
     },
     "variables": {
@@ -145,16 +151,7 @@
         "vnetID": "[resourceId(parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
         "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]",
         "diskCaching": "ReadWrite",
-        "storageaccounttype": "Standard_LRS",
-        "ipcode":{
-                    "type": "object",
-                    "privateIPAllocationMethod": "Static",
-                    "privateIPAddress": "172.25.2.15",
-                    "subnet": {
-                        "id": "[variables('subnetId')]"
-                    }
-                }
-   
+        "storageaccounttype": "Standard_LRS"
     },
     "resources": [
         {
@@ -177,60 +174,44 @@
         },
         {
             "apiVersion": "2015-01-01",
-            "name": "getpubipoptions",
+            "name": "[concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset')),'-nicsel')]",
             "type": "Microsoft.Resources/deployments",
-            "copy": {
-                "name": "vmcopy",
-                "count": "[length(parameters('vmnames'))]"
-            },
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[concat(parameters('assetLocation'), 'cust2-optionsselector', '.json')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "numDataDisks": {
-                        "value": "0"
-                    },
-                    "diskStorageAccountName": {
-                        "value": ""
-                    },
-                    "diskCaching": {
-                        "value": "None"
-                    },
-                    "folderpath": {
-                        "value": ""
-                    },
-                    "disksizes": {
-                        "value": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-                    },
-                    "enablepubip": {
-                        "value": "no"
-                    },
-                    "subnetref": {
-                        "value": "[variables('subnetId')]"
-                    }
-                }
-            }
-        },
-        {
-            "apiVersion": "[variables('apiVersion')]",
-            "type": "Microsoft.Network/networkInterfaces",
-            "name": "[concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset')))]",
-            "location": "[resourceGroup().location]",
             "copy": {
                 "name": "niccopy",
                 "count": "[length(parameters('vmnames'))]"
             },
             "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig",
-                        "properties": "[variables('ipcode')[0]]"
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('assetLocation'), 'cust2-optionsselectorv2', '.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "enablepubip": {
+                        "value": "[concat('', parameters('enablepubip')[copyIndex()])]"
+                    },
+                    "prvipaddr": {
+                        "value": "[parameters('vmstaticips')[copyIndex()]]"
+                    },
+                    "subnetid": {
+                        "value": "[variables('subnetId')]"
+                    },
+                    "pubipname": {
+                        "value": "[concat('', parameters('publiciplist')[copyIndex()])]"
                     }
-                ]
-            }
+                }
+            },
+            "resources": [
+                {
+                    "apiVersion": "[variables('apiVersion')]",
+                    "type": "Microsoft.Network/networkInterfaces",
+                    "name": "[concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset')))]",
+                    "location": "[resourceGroup().location]",
+                    "properties": {
+                        "ipConfigurations": "[reference(concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset')),'-nicsel')).outputs.nicipconfig.value]"
+                    }
+                }
+            ]
         },
         {
             "apiVersion": "2015-01-01",
@@ -243,7 +224,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat(parameters('assetLocation'), 'cust2-optionsselector', '.json')]",
+                    "uri": "[concat(parameters('assetLocation'), 'cust2-optionsselectorv2', '.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -261,12 +242,6 @@
                     },
                     "disksizes": {
                         "value": "[parameters('disksizes')[copyIndex()]]"
-                    },
-                    "enablepubip": {
-                        "value": "no"
-                    },
-                    "subnetref": {
-                        "value": "[variables('subnetId')]"
                     }
                 }
             },
@@ -351,4 +326,4 @@
             ]
         }
     ]
-}
+        }
