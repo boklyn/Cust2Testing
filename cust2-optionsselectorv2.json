@@ -93,7 +93,7 @@
     "variables": {
         "_comment1": "disksArray is ugly :( but it gets the job done. If anyone can make it better, please do!",
         "disksArray": {
-            "0": "",
+            "0": "[variables('dataDisks')['0']]",
             "1": "[variables('dataDisks')['1']]",
             "2": "[concat(variables('dataDisks')['1'], variables('dataDisks')['2'])]",
             "3": "[concat(variables('dataDisks')['1'], variables('dataDisks')['2'], variables('dataDisks')['3'])]",
@@ -108,6 +108,7 @@
             "12": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'])]"
         },
         "dataDisks": {
+            "0": "",
             "1": [
                 {
                     "name": "datadisk1",
@@ -274,7 +275,7 @@
                 "[variables('dataDisks')['12'][0]]"
             ]
         },
-        "_comment3": "This is a numeric value representing a choice for public ip or not. A 0 means no public IP. A 1 represents pulic ip. ",        
+        "_comment3": "This is a numeric value representing a choice for public ip or not. A 0 means no public IP. A 1 represents pulic ip. ",
         "ipconfig": [
             [
                 {

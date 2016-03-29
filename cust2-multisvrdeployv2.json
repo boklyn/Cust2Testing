@@ -188,7 +188,7 @@
                 },
                 "parameters": {
                     "enablepubip": {
-                        "value": "[concat('', parameters('enablepubip')[copyIndex()])]"
+                        "value": "[parameters('enablepubip')[copyIndex()]]"
                     },
                     "prvipaddr": {
                         "value": "[parameters('vmstaticips')[copyIndex()]]"
