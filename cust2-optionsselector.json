@@ -50,7 +50,8 @@
             "type": "array",
             "metadata": {
                 "description": "represents the disk sizes. "
-            }
+            },
+            "defaultValue": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
         }
     },
     "variables": {
