@@ -311,7 +311,7 @@
     "outputs": {
         "dataDiskArray": {
             "type": "array",
-            "value": "[variables('disksArray')[parameters('none')]]"
+            "value": "[variables('disksArray')['none']]"
         },
         "nicipconfig": {
             "type": "array",
