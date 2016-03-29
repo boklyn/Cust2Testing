@@ -22,7 +22,7 @@
             "metadata": {
                 "description": "This parameter allows the user to select the number of disks they want"
             },
-            "defaultValue": "0"
+            "defaultValue": "none"
         },
         "diskStorageAccountName": {
             "type": "string",
@@ -93,7 +93,7 @@
     "variables": {
         "_comment1": "disksArray is ugly :( but it gets the job done. If anyone can make it better, please do!",
         "disksArray": {
-            "0": "[variables('dataDisks')['none']]",
+            "none": "[variables('dataDisks')['none']]",
             "1": "[variables('dataDisks')['1']]",
             "2": "[concat(variables('dataDisks')['1'], variables('dataDisks')['2'])]",
             "3": "[concat(variables('dataDisks')['1'], variables('dataDisks')['2'], variables('dataDisks')['3'])]",
@@ -305,7 +305,6 @@
                 }
             ]
         ]
-
     },
     "resources": [ ],
     "outputs": {
