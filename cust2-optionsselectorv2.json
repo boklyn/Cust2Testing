@@ -109,7 +109,7 @@
             "12": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'])]"
         },
         "dataDisks": {
-            "none": "" ,
+            "none": [""] ,
             "1": [
                 {
                     "name": "datadisk1",
