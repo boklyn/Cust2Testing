@@ -17,13 +17,12 @@
                 "9",
                 "10",
                 "11",
-                "12",
-                "none"
+                "12"
             ],
             "metadata": {
                 "description": "This parameter allows the user to select the number of disks they want"
             },
-            "defaultValue": "none"
+            "defaultValue": "0"
         },
         "diskStorageAccountName": {
             "type": "string",
@@ -56,7 +55,7 @@
             "metadata": {
                 "description": "represents the disk sizes. "
             },
-            "defaultValue": [ ]
+            "defaultValue": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
         },
         "enablepubip": {
             "type": "int",
@@ -94,7 +93,7 @@
     "variables": {
         "_comment1": "disksArray is ugly :( but it gets the job done. If anyone can make it better, please do!",
         "disksArray": {
-            "none": "[variables('dataDisks')['none']]",
+            "0": "",
             "1": "[variables('dataDisks')['1']]",
             "2": "[concat(variables('dataDisks')['1'], variables('dataDisks')['2'])]",
             "3": "[concat(variables('dataDisks')['1'], variables('dataDisks')['2'], variables('dataDisks')['3'])]",
@@ -109,7 +108,6 @@
             "12": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'])]"
         },
         "dataDisks": {
-            "none": [""] ,
             "1": [
                 {
                     "name": "datadisk1",
@@ -311,7 +309,7 @@
     "outputs": {
         "dataDiskArray": {
             "type": "array",
-            "value": "[variables('disksArray')['none']]"
+            "value": "[variables('disksArray')[parameters('numDataDisks')]]"
         },
         "nicipconfig": {
             "type": "array",
