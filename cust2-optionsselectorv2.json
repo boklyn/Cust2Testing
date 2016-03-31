@@ -88,7 +88,15 @@
                 "description": "represents the privateip address"
             },
             "defaultValue": "None"
+        },
+        "pubiprggrp": {
+            "type": "string",
+            "metadata": {
+                "description": "represents the privateip address"
+            },
+            "defaultValue": "None"
         }
+        
     },
     "variables": {
         "_comment1": "disksArray is ugly :( but it gets the job done. If anyone can make it better, please do!",
@@ -298,7 +306,7 @@
                             "id": "[parameters('subnetId')]"
                         },
                         "publicIPAddress": {
-                            "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pubipname'))]"
+                            "id": "[resourceId(parameters('pubiprggrp'),'Microsoft.Network/publicIPAddresses', parameters('pubipname'))]"
                         }
                     }
                 }

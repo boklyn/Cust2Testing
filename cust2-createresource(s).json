@@ -1,0 +1,90 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "allowedValues": [
+                "West US",
+                "East US",
+                "West Europe",
+                "East Asia",
+                "Southeast Asia"
+            ],
+            "metadata": {
+                "Description": "The region to deploy the resources into"
+            }
+        },
+        "numresource": {
+            "type": "int",
+            "metadata": {
+                "Description": "The name of the NIC to Create or Update"
+            }
+        },
+        "choice": {
+            "type": "string",
+            "allowedValues": [
+                "Microsoft.Network/publicIPAddresses",
+                "Microsoft.Compute/availabilitySets"
+            ],
+            "defaultValue": "Microsoft.Compute/availabilitySets"
+        },
+        "nformat": {
+            "type": "string",
+            "metadata": {
+                "Description": "The IP configurations of the NIC"
+            }
+        },
+        "rname": {
+            "type": "string",
+            "metadata": {
+                "Description": "The IP configurations of the NIC"
+            }
+        },
+        "offset": {
+            "type": "int",
+            "metadata": {
+                "Description": "The DNS Servers of the NIC"
+            }
+        },
+        "apiver": {
+            "type": "string",
+            "metadata": {
+                "Description": "The DNS Servers of the NIC"
+            },
+            "defaultValue": "2015-05-01-preview"
+        },
+        "publicIPAddressType": {
+            "type": "string",
+            "allowedValues": [
+                "Dynamic",
+                "Static"
+            ],
+            "metadata": {
+                "description": "The type of the public IP address used by the Load Balancer"
+            },
+            "defaultValue": "Dynamic"
+        }
+    },
+    "variables": {
+        "_comment1": "code for creating public ip resource",
+        "rpropchoice": [
+            {
+                "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('rname')]"
+                }
+            },
+            ""
+        ]
+    },
+    "resources": [
+		{
+			"type": "Microsoft.Compute/availabilitySets",
+			"name": "[parameters('rname')]",
+			"apiVersion": "[parameters('apiver')]",
+            "location": "[parameters('location')]",
+            "properties": "[variables('rpropchoice')[1]]"
+		}
+    ]
+}

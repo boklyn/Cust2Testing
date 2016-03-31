@@ -14,6 +14,12 @@
                 "description": "The name of the new storage account created to store the VMs disks. Remmber reccomended max vhd disk is 40"
             }
         },
+        "pubiprggrp": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the new storage account created to store the VMs disks. Remmber reccomended max vhd disk is 40"
+            }
+        },
         "existingVNETName": {
             "type": "string",
             "metadata": {
@@ -141,6 +147,12 @@
             "metadata": {
                 "description": ""
             }
+        },
+        "pubiprggrp": {
+            "type": "string",
+            "metadata": {
+                "description": "The location of resources such as templates and DSC modules that the script is dependent"
+            }
         }
     },
     "variables": {
@@ -198,6 +210,9 @@
                     },
                     "pubipname": {
                         "value": "[concat('', parameters('publiciplist')[copyIndex()])]"
+                    },
+                    "pubiprggrp": {
+                        "value": "[parameters('pubiprggrp')]"
                     }
                 }
             },
@@ -326,4 +341,4 @@
             ]
         }
     ]
-        }
+}
