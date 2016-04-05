@@ -129,12 +129,51 @@
             "metadata": {
                 "description": "somethingelse"
             }
+        },
+        "imagePublisher": {
+            "type": "string",
+            "metadata": {
+                "description": "The location of resources such as templates and DSC modules that the script is dependent"
+            },
+            "allowedValues": [
+                "MicrosoftWindowsServer",
+                "MicrosoftSQLServer"
+            ],
+            "defaultValue": "MicrosoftWindowsServer"
+        },
+        "imageOffer": {
+            "type": "string",
+            "metadata": {
+                "description": "The location of resources such as templates and DSC modules that the script is dependent"
+            },
+            "allowedValues": [
+                "WindowsServer",
+                "SQL2012SP2-WS2012R2"
+            ],
+            "defaultValue": "WindowsServer"
+        },
+        "windowsOSversion": {
+            "type": "array",
+            "metadata": {
+                "description": "The location of resources such as templates and DSC modules that the script is dependent"
+            }
+        },
+        "storageAccountType": {
+            "type": "string",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_RAGRS",
+                "Standard_ZRS",
+                "Premium_LRS"
+            ],
+            "metadata": {
+                "description": "The type of the Storage Account created"
+            },
+            "defaultValue": "Standard_LRS"
         }
     },
     "variables": {
-        "imagePublisher": "MicrosoftWindowsServer",
-        "imageOffer": "WindowsServer",
-        "windowsOSVersion": "2012-R2-Datacenter",
         "apiVersion": "2015-06-15",
         "vnetID": "[resourceId(parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
         "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]",
@@ -148,7 +187,7 @@
             "apiVersion": "2015-05-01-preview",
             "location": "[resourceGroup().location]",
             "properties": {
-                "accountType": "[variables('storageaccounttype')]"
+                "accountType": "[parameters('storageaccounttype')]"
             }
         },
         {
@@ -239,9 +278,9 @@
                         },
                         "storageProfile": {
                             "imageReference": {
-                                "publisher": "[variables('imagePublisher')]",
-                                "offer": "[variables('imageOffer')]",
-                                "sku": "[variables('windowsOSVersion')]",
+                                "publisher": "[parameters('imagePublisher')]",
+                                "offer": "[parameters('imageOffer')]",
+                                "sku": "[parameters('windowsOSVersion')[copyIndex()]]",
                                 "version": "latest"
                             },
                             "osDisk": {

@@ -42,7 +42,7 @@
             "value": 1
         },
         "sitecount": {
-            "value": 5
+            "value": 6
         },
         "nicnameformat": {
             "value": "evhe1dr-nic-"
@@ -51,16 +51,16 @@
             "value": "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/"
         },
         "vmnames": {
-            "value": [ "evhe1dr-idwb-01", "evhe1dr-idwb-02", "evhe1dr-msap-01", "evhe1dr-ftp-01", "evhe1dr-orap-01" ]
+            "value": [ "evhe1dr-idwb-01", "evhe1dr-idwb-02", "evhe1dr-msap-01", "evhe1dr-ftp-01", "evhe1dr-orap-01", "evhe1dr-orap-02" ]
         },
         "vmSizes": {
-            "value": [ "Standard_DS3", "Standard_DS3", "Standard_DS3", "Standard_DS3", "Standard_D5_v2" ]
+            "value": [ "Standard_DS3", "Standard_DS3", "Standard_DS3", "Standard_DS3", "Standard_D5_v2", "Standard_D5_v2" ]
         },
         "vmstaticips": {
-            "value": [ "172.25.2.4", "172.25.2.5", "172.25.2.6", "172.25.2.7", "172.25.2.8" ]
+            "value": [ "172.25.2.4", "172.25.2.5", "172.25.2.6", "172.25.2.7", "172.25.2.8", "172.25.2.9" ]
         },
         "diskcount": {
-            "value": [ 1, 1, 1, 1, 2 ]
+            "value": [ 1, 1, 1, 1, 2, 2 ]
         },
         "disksizes": {
             "value": [                
@@ -68,6 +68,7 @@
                 [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
                 [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
                 [ 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 1000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
                 [ 1000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
             ]
         }

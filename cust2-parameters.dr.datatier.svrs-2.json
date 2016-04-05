@@ -1,0 +1,123 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "diagStorageAccountName": {
+            "value": "evhe1drstor06"
+        },
+        "VHDStorageAccountName": {
+            "value": "evhe1drstor05"
+        },
+        "existingVNETName": {
+            "value": "evhe1dr-vnet-001"
+        },
+        "vnetrgpname": {
+            "value": "EVHE1-RGP-001"
+        },
+        "existingSubnetName": {
+            "value": "evhe1dr-sub-004_172.25.12.0_24"
+        },
+        "domainToJoin": {
+            "value": "prod.corp.evolenthealth.com"
+        },
+        "domainUsername": {
+            "value": "evoladm"
+        },
+        "domainPassword": {
+            "value": "iVcMpEhwVkOUdIQP4xFx"
+        },
+        "ouPath": {
+            "value": ""
+        },
+        "domainJoinOptions": {
+            "value": 3
+        },
+        "vmAdminUsername": {
+            "value": "evollocadm"
+        },
+        "vmAdminPassword": {
+            "value": "P@ssword!"
+        },
+        "nicoffset": {
+            "value": 35
+        },
+        "sitecount": {
+            "value": 6
+        },
+        "nicnameformat": {
+            "value": "evhe1dr-nic-"
+        },
+        "assetLocation": {
+            "value": "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/"
+        },
+        "vmnames": {
+            "value": [
+                "evhe1dr-sqet-01",
+                "evhe1dr-sqet-02",
+                "evhe1dr-sqdw-01",
+                "evhe1dr-sqdw-02",
+                "evhe1dr-sqot-01",
+                "evhe1dr-sqot-02"
+            ]
+        },
+        "vmSizes": {
+            "value": [
+                "Standard_DS14",
+                "Standard_DS14",
+                "Standard_DS14",
+                "Standard_DS14",
+                "Standard_DS14",
+                "Standard_DS14"
+            ]
+        },
+        "vmstaticips": {
+            "value": [
+                "172.25.12.4",
+                "172.25.12.5",
+                "172.25.12.6",
+                "172.25.12.7",
+                "172.25.12.8",
+                "172.25.12.9"
+            ]
+        },
+        "diskcount": {
+            "value": [
+                1,
+                1,
+                11,
+                11,
+                1,
+                1
+            ]
+        },
+        "disksizes": {
+            "value": [
+                [ 600, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 600, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 1000, 1000, 500, 1000, 1000, 1000, 1000, 1000, 1000, 300, 200, 0 ],
+                [ 1000, 1000, 500, 1000, 1000, 1000, 1000, 1000, 1000, 300, 200, 0 ],
+                [ 600, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 600, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+            ]
+        },
+        "imagePublisher": {
+            "value": "MicrosoftSQLServer"
+        },
+        "imageOffer": {
+            "value": "SQL2012SP2-WS2012R2"
+        },
+        "windowsOSversion": {
+            "value": [
+                "Enterprise",
+                "Enterprise",
+                "Enterprise-Optimized-for-DW",
+                "Enterprise-Optimized-for-DW",
+                "Enterprise-Optimized-for-OLTP",
+                "Enterprise-Optimized-for-OLTP"
+            ]
+        },
+        "storageAccountType": {
+            "value": "Premium_LRS"
+        }
+    }
+}
