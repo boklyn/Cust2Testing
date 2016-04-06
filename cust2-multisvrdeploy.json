@@ -290,8 +290,7 @@
                                 },
                                 "caching": "ReadWrite",
                                 "createOption": "FromImage"
-                            },
-                            "dataDisks": "[reference(concat(toLower(parameters('vmnames')[copyIndex()]),'-disksel')).outputs.dataDiskArray.value]"
+                            }
                         },
                         "networkProfile": {
                             "networkInterfaces": [

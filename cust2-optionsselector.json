@@ -17,7 +17,13 @@
                 "9",
                 "10",
                 "11",
-                "12"
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "32",
+                "64"
             ],
             "metadata": {
                 "description": "This parameter allows the user to select the number of disks they want"
@@ -51,7 +57,7 @@
             "metadata": {
                 "description": "represents the disk sizes. "
             },
-            "defaultValue": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+            "defaultValue": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
         }
     },
     "variables": {
@@ -69,7 +75,11 @@
             "9": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('dataDisks')['9'])]",
             "10": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('dataDisks')['9'], variables('dataDisks')['10'])]",
             "11": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('dataDisks')['9'], variables('dataDisks')['10'], variables('dataDisks')['11'])]",
-            "12": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'])]"
+            "12": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'])]",
+            "13": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('dataDisks')['13'])]",
+            "14": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('dataDisks')['13'], variables('dataDisks')['14'])]",
+            "15": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('dataDisks')['13'], variables('dataDisks')['14'], variables('dataDisks')['15'])]",
+            "16": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'])]"
         },
         "dataDisks": {
             "1": [
@@ -215,6 +225,54 @@
                     "caching": "[parameters('diskCaching')]",
                     "diskSizeGB": "[parameters('disksizes')[11]]"
                 }
+            ],
+            "13": [
+                {
+                    "name": "datadisk13",
+                    "lun": 12,
+                    "vhd": {
+                        "uri": "[concat('http://', parameters('diskStorageAccountName'),'.blob.core.windows.net/', parameters('folderpath'), 'datadisk13.vhd')]"
+                    },
+                    "createOption": "Empty",
+                    "caching": "[parameters('diskCaching')]",
+                    "diskSizeGB": "[parameters('disksizes')[12]]"
+                }
+            ],
+            "14": [
+                {
+                    "name": "datadisk14",
+                    "lun": 13,
+                    "vhd": {
+                        "uri": "[concat('http://', parameters('diskStorageAccountName'),'.blob.core.windows.net/', parameters('folderpath'), 'datadisk14.vhd')]"
+                    },
+                    "createOption": "Empty",
+                    "caching": "[parameters('diskCaching')]",
+                    "diskSizeGB": "[parameters('disksizes')[13]]"
+                }
+            ],
+            "15": [
+                {
+                    "name": "datadisk15",
+                    "lun": 14,
+                    "vhd": {
+                        "uri": "[concat('http://', parameters('diskStorageAccountName'),'.blob.core.windows.net/', parameters('folderpath'), 'datadisk15.vhd')]"
+                    },
+                    "createOption": "Empty",
+                    "caching": "[parameters('diskCaching')]",
+                    "diskSizeGB": "[parameters('disksizes')[14]]"
+                }
+            ],
+            "16": [
+                {
+                    "name": "datadisk16",
+                    "lun": 15,
+                    "vhd": {
+                        "uri": "[concat('http://', parameters('diskStorageAccountName'),'.blob.core.windows.net/', parameters('folderpath'), 'datadisk16.vhd')]"
+                    },
+                    "createOption": "Empty",
+                    "caching": "[parameters('diskCaching')]",
+                    "diskSizeGB": "[parameters('disksizes')[15]]"
+                }
             ]
         },
         "_comment2": "The delta arrays below build the difference from 0 to 4, 4 to 8, 8 to 12 disks and so on",
@@ -236,7 +294,14 @@
                 "[variables('dataDisks')['10'][0]]",
                 "[variables('dataDisks')['11'][0]]",
                 "[variables('dataDisks')['12'][0]]"
+            ],
+            "16delta": [
+                "[variables('dataDisks')['13'][0]]",
+                "[variables('dataDisks')['14'][0]]",
+                "[variables('dataDisks')['15'][0]]",
+                "[variables('dataDisks')['16'][0]]"
             ]
+
         }
     },
     "resources": [ ],
