@@ -263,9 +263,7 @@
                     "location": "[resourceGroup().location]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]",
-                        "[resourceId('Microsoft.Resources/deployments', concat(toLower(parameters('vmnames')[copyIndex()]),'-disksel'))]",
-                        "[resourceId('Microsoft.Storage/storageAccounts',parameters('VHDStorageAccountName'))]",
-                        "[resourceId('Microsoft.Storage/storageAccounts',parameters('diagStorageAccountName'))]"
+                        "[resourceId('Microsoft.Resources/deployments', concat(toLower(parameters('vmnames')[copyIndex()]),'-disksel'))]"
                     ],
                     "properties": {
                         "hardwareProfile": {
@@ -280,7 +278,7 @@
                             "imageReference": {
                                 "publisher": "[parameters('imagePublisher')]",
                                 "offer": "[parameters('imageOffer')]",
-                                "sku": "[parameters('windowsOSVersion')[copyIndex()]]",
+                                "sku": "[parameters('windowsOSversion')[copyIndex()]]",
                                 "version": "latest"
                             },
                             "osDisk": {
@@ -290,7 +288,8 @@
                                 },
                                 "caching": "ReadWrite",
                                 "createOption": "FromImage"
-                            }
+                            },
+                            "dataDisks": "[reference(concat(toLower(parameters('vmnames')[copyIndex()]),'-disksel')).outputs.dataDiskArray.value]"
                         },
                         "networkProfile": {
                             "networkInterfaces": [

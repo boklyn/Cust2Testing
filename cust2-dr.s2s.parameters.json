@@ -6,25 +6,28 @@
       "value": "East US"
     },
     "virtualNetworkName": {
-      "value": "evhe2dm-vnet-001"
+      "value": "evhe1dr-vnet-001"
     },
     "localGatewayName": {
-      "value": "evhe1dm-lng-001"
+      "value": "evhe1dr-lng-001"
     },
     "localGatewayIpAddress": {
       "value": "12.97.27.66"
     },
     "localGatewayAddressPrefix": {
-      "value": [ "172.16.1.0/24","172.16.32.0/19","172.16.64.0/19","172.16.16.0/22" ]
+      "value": [ "172.16.1.0/24","172.16.16.0/22","172.16.32.0/19","172.16.64.0/20","172.16.80.0/22","172.16.84.0/23","172.16.86.0/23","172.16.88.0/23","172.16.90.0/23" ]
     },
     "gatewayPublicIPName": {
-      "value": "evhe1dm-pip-001"
+      "value": "evhe1dr-pip-001"
     },
     "gatewayName": {
-      "value": "evhe1dm-vgw-001"
+      "value": "evhe1dr-vgw-001"
     },
     "gatewaySubnet": {
       "value": "GatewaySubnet"
+    },
+    "vnetrgpname": {
+      "value": "EVHE1-RGP-001"
     }
   }
 }

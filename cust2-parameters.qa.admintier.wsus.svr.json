@@ -2,11 +2,11 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "diagStorageAccountName": {
-            "value": "evhe1drstor08"
-        },
         "VHDStorageAccountName": {
-            "value": "evhe1drstor07"
+            "value": "evhe1dmstor01"
+        },
+        "diagStorageAccountName": {
+            "value": "evhe1dmstor02"
         },
         "existingVNETName": {
             "value": "EVHE2DM-VNET-001"
@@ -15,7 +15,7 @@
             "value": "EVHE1-RGP-001"
         },
         "existingSubnetName": {
-            "value": "EVHE2DM-SUB-004_172.24.12.0_24"
+            "value": "EVHE2DM-SUB-003_172.24.14.0_24"
         },
         "domainToJoin": {
             "value": "azureqa.corp.evolenthealth.com"
@@ -39,61 +39,41 @@
             "value": "P@ssword!"
         },
         "nicoffset": {
-            "value": 37
+            "value": 16
         },
         "sitecount": {
-            "value": 4
+            "value": 1
         },
         "nicnameformat": {
-            "value": "evhe1dr-nic-"
+            "value": "evhe1dm-nic-"
         },
         "assetLocation": {
             "value": "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/"
         },
         "vmnames": {
             "value": [
-                "evhe1dr-sqot-01",
-                "evhe1dr-sqot-02"
+                "evhe1dm-wsus-01"
             ]
         },
         "vmSizes": {
             "value": [
-                "Standard_DS14",
-                "Standard_DS14"
+                "Standard_DS3"
             ]
         },
         "vmstaticips": {
             "value": [
-                "172.24.12.7",
-                "172.24.12.8"
+                "172.24.14.7"
             ]
         },
         "diskcount": {
             "value": [
-                12,
-                12
+                1
             ]
         },
         "disksizes": {
             "value": [
-                [ 1000, 1000, 100, 500, 1000, 1000, 1000, 1000, 1000, 1000, 300, 200, 0, 0, 0, 0 ],
-                [ 1000, 1000, 100, 500, 1000, 1000, 1000, 1000, 1000, 1000, 300, 200, 0, 0, 0, 0 ]
+               [ 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
             ]
-        },
-        "imagePublisher": {
-            "value": "MicrosoftSQLServer"
-        },
-        "imageOffer": {
-            "value": "SQL2012SP2-WS2012R2"
-        },
-        "windowsOSversion": {
-            "value": [
-                "Enterprise",
-                "Enterprise"
-            ]
-        },
-        "storageAccountType": {
-            "value": "Premium_LRS"
         }
     }
 }
