@@ -3,7 +3,7 @@
     [string]$disks
 )
 
-$friendlypoolname = "priemarydiskpool"
+$friendlypoolname = "primarydiskpool"
 $dktopool = Get-PhysicalDisk | Where-Object {$_.CanPool -eq $true}
 $subsystem = Get-StorageSubSystem
 New-StoragePool -FriendlyName $friendlypoolname -StorageSubSystemFriendlyName $subsystem.FriendlyName -PhysicalDisks $dktopool
