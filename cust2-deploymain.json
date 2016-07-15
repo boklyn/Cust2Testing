@@ -8,7 +8,7 @@
                 "description": "Environment to Deploy"
             },
           "allowedValues": [
-            "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/evh-template-multisvrdeploy_withkey.json",
+            "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/nmarket-template-multisvrdeploy_withkey.cse.dsc.nodomain.json",
             "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/evh-template-domaincontrollers_withkey.json",
             "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-s2s.json",
             "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-apptier.twosvrdeploy.json"
@@ -20,7 +20,7 @@
                 "description": "Different Parameters files choice"
             },
           "allowedValues": [
-            "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/evh-parameters-dr.key.admintier.svrs.json",
+            "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/nmarket-parameters-key.svrsnodomainscentral-03.json",
             "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/evh-parameters-dr.key.domaincontrollers1.json",
             "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-dr.s2s.parameters.json",
             "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/cust2-webtier.parameters.json",
