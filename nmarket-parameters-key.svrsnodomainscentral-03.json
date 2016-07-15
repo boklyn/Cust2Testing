@@ -1,0 +1,99 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VHDStorageAccountNames": {
+      "value": [ "abbscnmsto06", "abbscnmsto07" ]
+    },
+    "diagStorageAccountName": {
+      "value": "abbscnmsto05"
+    },
+    "existingVNETName": {
+      "value": "abbsc-nmvnet-02"
+    },
+    "vnetrgpname": {
+      "value": "abbsc-nmrgp-03"
+    },
+    "existingSubnetName": {
+      "value": "abbsc-nmsub-01_172.26.8.0_24"
+    },
+    "vmAdminUsername": {
+      "value": "abblocadm"
+    },
+    "vmAdminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/2115081f-a797-4728-9525-96db764bda0c/resourceGroups/bok-nmrgp-01/providers/Microsoft.KeyVault/vaults/bok-kyvt-02"
+        },
+        "secretName": "ladminpass"
+      }
+    },
+    "optionsselectpath": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/2115081f-a797-4728-9525-96db764bda0c/resourceGroups/bok-nmrgp-01/providers/Microsoft.KeyVault/vaults/bok-kyvt-02"
+        },
+        "secretName": "optionselcturl"
+      }
+    },
+    "initidiskpath": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/2115081f-a797-4728-9525-96db764bda0c/resourceGroups/bok-nmrgp-01/providers/Microsoft.KeyVault/vaults/bok-kyvt-02"
+        },
+        "secretName": "initdiskurl"
+      }
+    },
+    "nicoffset": {
+      "value": 3
+    },
+    "sitecount": {
+      "value": 2
+    },
+    "nicnameformat": {
+      "value": "abbscnm-nic-"
+    },
+    "DBServer": {
+      "value": "abbsc-aesql-02"
+    },
+    "DBName": {
+      "value": "base_line"
+    },
+    "packageurl": {
+      "value": "https://abbscdpsto01.blob.core.windows.net/nmarket31/01-NM-AZURE-DEV_110.zip?sv=2015-04-05&sr=b&sig=nu2AhAhU4LGrmZ7xb6EtCCHpq6h8giAim0DNZY%2FNtfk%3D&se=2016-07-15T23%3A55%3A03Z&sp=r"
+    },
+    "vmnames": {
+      "value": [ "abbsc-nmap-03", "abbsc-nmap-04" ]
+    },
+    "vmSizes": {
+      "value": [ "Standard_DS11", "Standard_DS11" ]
+    },
+    "vmstaticips": {
+      "value": [ "172.26.8.23", "172.26.8.24" ]
+    },
+    "diskcount": {
+      "value": [
+        1,
+        1
+      ]
+    },
+    "disksizes": {
+      "value": [
+        [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+        [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+      ]
+    },
+    "initdisksizes": {
+      "value": [
+        "95",
+        "95"
+      ]
+    },
+    "windowsOSversion": {
+      "value": [
+        "2012-R2-Datacenter",
+        "2012-R2-Datacenter"
+      ]
+    }
+  }
+}
