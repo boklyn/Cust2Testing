@@ -1,0 +1,64 @@
+{
+
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+
+  "contentVersion": "1.0.0.0",
+
+  "parameters": {
+    "storageAccountName": {
+      "type": "string"
+    },
+    "storageAccountType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_ZRS",
+        "Premium_LRS"
+      ],
+      "metadata": {
+        "description": "Storage Account type with default values and allowed values."
+      }
+    }
+  },
+
+  "variables": {
+    "storageAccountNamevar": "[concat(parameters('storageAccountName'), 'end')]",
+     "location": "[resourceGroup().location]"
+  },
+
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storageAccountNamevar')]",
+      "apiVersion": "2016-01-01",
+      "location": "[variables('location')]",
+      "sku": { "name": "[parameters('storageAccountType')]" },
+      "kind": "Storage",
+      "comments": "This storage account is used to store the VM disks",
+      "properties": {
+      }
+    }
+  ],
+
+  "outputs": {
+    "var": {
+      "type": "string",
+      "value": "[variables('storageAccountNamevar')]"
+    },
+    "parameter1": {
+      "type": "string",
+      "value": "[parameters('storageAccountName')]"
+    },
+    "parameter2": {
+      "type": "string",
+      "value": "[parameters('storageAccountType')]"
+    },
+    "rglocation": {
+        "type": "string",
+        "value": "[variables('location')]"
+      }
+    }
+  }
+
