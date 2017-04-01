@@ -19,7 +19,7 @@
                 "description": "Different Parameters files choice"
             },
           "allowedValues": [
-            "https://raw.githubusercontent.com/boklyn/Cust2Testing/masterbasicvm_parameters.json"
+            "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/basicvm_parameters.json"
           ]
         }
 
