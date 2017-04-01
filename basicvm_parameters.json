@@ -6,7 +6,7 @@
       "value": "someuser"
     },
     "adminPassword": {
-      "value": "P@ssw0rd01!"
+      "value": "P@ssw0rd01!abc"
     },
     "dnsLabelPrefix": {
       "value": "bokfirstmachine"
