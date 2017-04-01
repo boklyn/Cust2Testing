@@ -9,7 +9,7 @@
             },
           "allowedValues": [
             "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/100.6.json",
-            "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/basicvm.json",
+            "https://raw.githubusercontent.com/boklyn/Cust2Testing/master/basicvm.json"
 			
           ]
         },
