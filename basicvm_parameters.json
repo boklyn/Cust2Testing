@@ -6,10 +6,10 @@
       "value": "someuser"
     },
     "adminPassword": {
-      "value": "P@ssw0rd01!abc"
+      "value": "p@ssw0rd01!abc"
     },
     "dnsLabelPrefix": {
-      "value": "bokfirstmachine"
+      "value": "boksecondmachine"
     },
     "windowsOSVersion": {
       "value": "2008-R2-SP1"
