@@ -3,13 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "adminUsername": {
-      "value": "GEN-USER"
+      "value": "someuser"
     },
     "adminPassword": {
-      "value": "GEN-PASSWORD"
+      "value": "p@ssw0rd01!"
     },
     "dnsLabelPrefix": {
-      "value": "GEN-UNIQUE"
+      "value": "bokfirstmachine"
     },
     "windowsOSVersion": {
       "value": "2008-R2-SP1"
